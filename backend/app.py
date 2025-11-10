@@ -3,6 +3,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import os, requests
+import re
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -56,6 +57,7 @@ async def ask(q: Query):
     
     try:
         text = data["choices"][0]["message"]["content"].strip()
+        text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Malformed LLM response: {e}")
     return {"answer": text}
