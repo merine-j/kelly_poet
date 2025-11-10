@@ -12,7 +12,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 if not GROQ_API_KEY:
     raise RuntimeError("❌ GROQ_API_KEY not found. Please set it in your .env file.")
 
-app = FastAPI(title="Kelly — AI Scientist Poet")
+app = FastAPI(title="Kelly — AI Poet")
 
 class Query(BaseModel):
     question: str
